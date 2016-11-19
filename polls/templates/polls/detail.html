@@ -6,13 +6,18 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'polls:vote' question.id %}" method="post">
+<form class="form-inline" action="{% url 'polls:vote' question.id %}" method="post">
+<div class="form-group">
 {% csrf_token %}
 {% for choice in question.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+<div class="form-check">
+        <input class="form-check-input" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label class="form-check-label" for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+</div>  
 {% endfor %}
-<input type="submit" value="Vote" />
+<input type="submit" class ="btn btn-primary" value="Vote" />
+</div>
 </form>
+
 
 {% endblock %}
