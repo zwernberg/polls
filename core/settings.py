@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 import environ
-env = environ.Env()
+env = environ.Env(DEBUG=(bool, False),) # set default values and casting
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG', default=True)
+DEBUG = env('DEBUG')
 if(DEBUG):
     ALLOWED_HOSTS = ['192.168.1.107', 'localhost', '127.0.0.1']
 else:
