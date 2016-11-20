@@ -30,7 +30,7 @@ DEBUG = env('DEBUG', default=True)
 if(DEBUG):
     ALLOWED_HOSTS = ['192.168.1.107', 'localhost', '127.0.0.1']
 else:
-    ALLOWED_HOSTS =[]
+    ALLOWED_HOSTS =['*']
 
 
 # Application definition
