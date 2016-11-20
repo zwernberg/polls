@@ -13,5 +13,5 @@ class ChoiceForm(ModelForm):
         model = Choice
         fields = ['choice_text']
 
-ChoiceFormSet = inlineformset_factory(Question,Choice,form=ChoiceForm, fields=('choice_text',), extra=3 )
+ChoiceFormSet = inlineformset_factory(Question,Choice,form=ChoiceForm, fields=('choice_text',), extra=0 ,min_num=1, max_num=5 )
 
