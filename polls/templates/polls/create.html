@@ -3,7 +3,7 @@
 {% block extrahead %}
 <script type="text/javascript">
     $(function() {
-        $('#create-form div#choice-forms-container div').formset({
+        $('#create-form div#choice-forms-container div div').formset({
             prefix: '{{ choice_form.prefix }}',
             deleteCssClass: 'btn btn-danger btn-sm',
             addCssClass: 'btn btn-warning btn-sm'
@@ -23,12 +23,19 @@
 {% block content %}
 <form id="create-form" action="" method="post">
     {% csrf_token %} {{ form.as_p }} {{ choice_form.management_form }} {{ choice_form.non_form_errors }}
+            <div class="input-group input-group-lg">
+
     <div id="choice-forms-container">
         {% for form in choice_form %} {{ form.id }}
-        <div class="inline {{ choice_form.prefix }}">
-            {{ form.choice_text.errors }} {{ form.choice_text.label_tag }} {{ form.choice_text }}
+        <div class="form-group row {{ choice_form.prefix }}">
+            <div class="form-group">
+
+            <input class="form-control" id="id_choice_set-{{ forloop.counter }}-choice_text" maxlength="200" name="choice_set-{{ forloop.counter }}-choice_text" placeholder="Choice" type="text">
+            </div>
+            {{ form.choice_text.errors }}
         </div>
         {% endfor %}
+        </div>
 
     </div>
     <br />
