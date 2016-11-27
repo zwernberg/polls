@@ -4,7 +4,7 @@ from polls.models import Question, Choice
 class ChoiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Choice
-        fields = ('url', 'choice_text', 'votes')
+        fields = ('url', 'id', 'choice_text', 'votes')
         read_only_fields = ('votes',)
         
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
@@ -12,7 +12,7 @@ class QuestionSerializer(serializers.HyperlinkedModelSerializer):
     
     class Meta:
         model = Question
-        fields = ('url', 'question_text', 'choices',)
+        fields = ('url', 'id', 'question_text', 'choices',)
         
     def create(self, validated_data):
         choices_data = validated_data.pop('choices')
@@ -21,6 +21,4 @@ class QuestionSerializer(serializers.HyperlinkedModelSerializer):
         for choice_data in choices_data:
             Choice.objects.create(question=question, **choice_data)
         
-        return question        
-        
-    
+        return question
