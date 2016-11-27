@@ -5,6 +5,7 @@ class ChoiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Choice
         fields = ('url', 'choice_text', 'votes')
+        read_only_fields = ('votes',)
         
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
     choices = ChoiceSerializer(many=True)
