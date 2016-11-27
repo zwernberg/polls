@@ -19,7 +19,7 @@ from rest_framework.routers import DefaultRouter
 
 from polls import views
 
-router = DefaultRouter(trailing_slash=False)
+
 router.register(r'polls', views.QuestionViewset)
 router.register(r'choices', views.ChoiceViewset)
 
