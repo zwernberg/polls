@@ -37,6 +37,11 @@ if(DEBUG):
     ALLOWED_HOSTS = ['192.168.1.107', 'localhost', '127.0.0.1']
 else:
     ALLOWED_HOSTS =['*']
+    
+# Cors
+CORS_ORIGIN_ALLOW_ALL = True
+    
+
 
 
 # Application definition
@@ -49,11 +54,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'polls.apps.PollsConfig'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
