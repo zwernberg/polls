@@ -39,7 +39,7 @@ else:
     ALLOWED_HOSTS =['*']
     
 # Cors
-CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = (
     '192.241.159.51'
