@@ -12,7 +12,13 @@ class QuestionSerializer(serializers.HyperlinkedModelSerializer):
     
     class Meta:
         model = Question
-        fields = ('url', 'id', 'question_text', 'choices',)
+        fields = ('url', 'slugfield', 'question_text', 'choices',)
+        read_only_fields = ('slugfield',)
+        lookup_field = 'slugfield'
+        extra_kwargs = {
+            'url': {'lookup_field': 'slugfield'}
+        }
+
         
     def create(self, validated_data):
         choices_data = validated_data.pop('choices')

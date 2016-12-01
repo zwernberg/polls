@@ -16,6 +16,8 @@ from .serializers import QuestionSerializer, ChoiceSerializer
 class QuestionViewset(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+    lookup_field = 'slugfield'
+
     
 class ChoiceViewset(viewsets.ReadOnlyModelViewSet):
 
