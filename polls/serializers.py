@@ -4,12 +4,10 @@ from polls.models import Question, Choice
 class ChoiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Choice
-        fields = ('url', 'id', 'choice_text', 'votes')
-        read_only_fields = ('votes',)
+        fields = ('url', 'id', 'choice_text',)
         
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
     choices = ChoiceSerializer(many=True)
-    
     class Meta:
         model = Question
         fields = ('url', 'slugfield', 'question_text', 'choices',)
@@ -26,5 +24,22 @@ class QuestionSerializer(serializers.HyperlinkedModelSerializer):
         
         for choice_data in choices_data:
             Choice.objects.create(question=question, **choice_data)
-        
         return question
+
+
+class ChoiceResultSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Choice
+        fields = ('url', 'id', 'choice_text', 'votes')
+        read_only_fields = ('votes',)
+        
+class QuestionResultSerializer(serializers.HyperlinkedModelSerializer):
+    choices = ChoiceResultSerializer(many=True)
+    class Meta:
+        model = Question
+        fields = ('url', 'slugfield', 'question_text', 'choices',)
+        read_only_fields = ('slugfield',)
+        lookup_field = 'slugfield'
+        extra_kwargs = {
+            'url': {'lookup_field': 'slugfield'}
+        }

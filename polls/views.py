@@ -10,7 +10,7 @@ from rest_framework.response import Response
 
 
 from polls.models import Question, Choice
-from .serializers import QuestionSerializer, ChoiceSerializer
+from .serializers import QuestionSerializer, ChoiceSerializer, QuestionResultSerializer
 
 # Create your views here.
 class QuestionViewset(viewsets.ModelViewSet):
@@ -18,7 +18,15 @@ class QuestionViewset(viewsets.ModelViewSet):
     serializer_class = QuestionSerializer
     lookup_field = 'slugfield'
 
-    
+
+
+    @detail_route(methods=['get'])
+    def results(self, request, slugfield):
+        question = get_object_or_404(Question, slugfield=slugfield)
+        serializer = QuestionResultSerializer(question,context={'request': request})
+        return Response(serializer.data)
+
+
 class ChoiceViewset(viewsets.ReadOnlyModelViewSet):
 
     queryset = Choice.objects.all()
@@ -30,5 +38,6 @@ class ChoiceViewset(viewsets.ReadOnlyModelViewSet):
         choice.votes += 1
         choice.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
         
        
